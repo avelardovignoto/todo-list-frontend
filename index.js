@@ -1,23 +1,26 @@
 const form = document.querySelector("#form");
 
-const tasks = sendTask => {
-    fetch('api/v1/tasks',{
+const sendTask = task => {
+    const url = 'http://localhost8080.api/v1/tasks';
+    const header = {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application.js',
-        },
-        body: JSON.stringify()
-    })
-    .then(response => response.json())
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(task)
+    }
+    fetch(url,header)
+    .then(response => response.json)
     .then(data => response);
+    const resp = data;
+    console.log(resp);
 }
+promessa();
 
 form.addEventListener('submit', e => {
     e.preventDefault();
 
-    const tasks = Object.create(null);
-    tasks.task = e.target.task.value;
-    console.log(tasks);
+    const task = Object.create(null);
+    task.nameTask = e.target.NameTask.value;
+    console.log(task);
 
-    tasks(sendTask);
+    sendTask(task);
 })
